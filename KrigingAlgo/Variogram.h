@@ -149,11 +149,41 @@ double circularVariogram(double H, double C0, double CX, double A)
 matrix calculateVariogram(vector3 A[], vector3 B[], int M, int N, int startA, int endA, int startB, int endB, VariogramModel v)
 {
 	matrix D = matrix(M,N);
+
+	//за цикл вынесем определение метода расчета вариограммы, чтобы меньше if-ов было
+	//double (*mm)(double H, double C0, double CX, double A) = nullptr;
+	//if(v.VAR == SPHERICAL)
+	//{
+	//	mm = sphericalVariogram;
+	//}
+	//else if(v.VAR == EXPONENTIAL)
+	//{
+	//	mm=exponentialVariogram;
+	//}
+	//else if(v.VAR == GAUSSIAN)
+	//{
+	//	mm=gaussianVariogram;
+	//}
+	//else if(v.VAR == WAVE)
+	//{
+	//	mm=waveVariogram;
+	//}
+	//else if(v.VAR == RATIONAL_Q)
+	//{
+	//	mm=rationalQuadraticVariogram;
+	//}
+	//else if(v.VAR == CIRCULAR)
+	//{
+	//	mm=circularVariogram;
+	//}
+
 	for(int a = startA; a < endA; ++a)
 	{
 		for(int b = startB; b < endB; ++b)
 		{
 			double d = vector3::distance(A[a],B[b]);
+
+			//D.set(a,b, mm(d, v.C0, v.CX, v.A));
 			if(v.VAR == SPHERICAL)
 			{
 				D.set(a,b,sphericalVariogram(d, v.C0, v.CX, v.A));

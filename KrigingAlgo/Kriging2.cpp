@@ -351,8 +351,9 @@ void KrigingAlgo::Kriging2::SimpleKrige(Model model, cli::array<float>^ buffer, 
 		for (int y = 0; y < sizeY; ++y)
 		{
 			double coordY = S.minY + y * RY;
-			S.S[x * sizeY + y].x = coordX;
-			S.S[x * sizeY + y].y = coordY;
+			int i = x * sizeY + y;
+			S.S[i].x = coordX;
+			S.S[i].y = coordY;
 		}
 	}
 
